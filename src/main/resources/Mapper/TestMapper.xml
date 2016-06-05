@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SoftwareEngineering2.A4.DAO.TestDAO">
+
+    <resultMap type="com.Cirno.POJO.Test" id="test">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="test" column="test" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, test
+    </sql>
+
+    <select id="selectAll" resultMap="test">
+        SELECT <include refid="Base_Column_List" />
+        FROM test
+    </select>
+
+    <update id="updateById" parameterType="com.Cirno.POJO.Test">
+        UPDATE test
+        SET test = #{test}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="INTEGER">
+        DELETE FROM test
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.Cirno.POJO.Test" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO test (test) VALUES (#{test})
+    </insert>
+</mapper>
